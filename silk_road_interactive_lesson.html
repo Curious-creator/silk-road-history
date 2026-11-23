@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>丝绸之路：历史探索与外交决策</title>
+<style>
+:root{--navy:#17324d;--blue:#2f6f9f;--gold:#d99b32;--paper:#fbf8f1;--ink:#263746;--green:#387b61}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei",Arial,sans-serif;line-height:1.6}
+header{background:linear-gradient(120deg,#17324d,#28658a);color:white;padding:28px 20px;text-align:center}
+header h1{margin:0 0 6px;font-size:clamp(25px,4vw,38px)}header p{margin:0;opacity:.9}
+.wrap{max-width:1050px;margin:22px auto;padding:0 16px}
+.topbar{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
+.progress{background:#e6e0d4;border-radius:20px;height:10px;overflow:hidden;flex:1;min-width:150px}.progress>div{height:100%;width:0;background:var(--gold);transition:.25s}
+.score{background:#fff;border:1px solid #e5dccb;border-radius:12px;padding:7px 13px;font-weight:700}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tabs button,.btn{border:0;border-radius:9px;padding:10px 15px;background:#e6edf2;color:var(--navy);font-weight:700;cursor:pointer}
+.tabs button.active,.btn.primary{background:var(--blue);color:white}.btn.gold{background:var(--gold);color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}
+.panel{display:none;background:#fff;border:1px solid #e8e0d3;border-radius:16px;padding:22px;box-shadow:0 5px 18px #24394b0c}.panel.active{display:block}
+h2{color:var(--navy);margin-top:0}h3{color:var(--blue);margin-bottom:8px}
+.callout{background:#f4f0e6;border-left:4px solid var(--gold);padding:12px 15px;border-radius:7px;margin:12px 0}
+.question{padding:14px;border:1px solid #e6eaf0;border-radius:12px;margin:12px 0}
+.option{display:block;padding:9px 11px;margin:7px 0;border:1px solid #dce3e8;border-radius:8px;cursor:pointer}.option:hover{background:#f3f7fa}.option input{margin-right:8px}
+input[type=text],textarea,select{width:100%;padding:10px;border:1px solid #ccd6dd;border-radius:8px;font:inherit;margin:6px 0 12px}
+textarea{min-height:85px;resize:vertical}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.card{border:1px solid #e1e7eb;border-radius:12px;padding:13px;background:#fcfdfe}.card strong{color:var(--navy)}
+.tag{display:inline-block;background:#edf3f6;color:#315c77;border-radius:20px;padding:3px 9px;font-size:13px;margin:3px}
+.feedback{font-weight:700;margin:10px 0;min-height:25px}.good{color:var(--green)}.bad{color:#a64c3c}
+.timeline-item{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #e2e8ec;border-radius:9px;margin:7px 0;background:#fff}
+.timeline-item .year{font-weight:700;color:var(--blue);min-width:70px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+footer{text-align:center;color:#73818b;padding:25px 10px;font-size:13px}
+.small{font-size:13px;color:#667783}.mapline{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:15px 0}.place{background:#eaf1f5;border:1px solid #d3e0e8;border-radius:9px;padding:9px 12px;font-weight:700}.arrow{color:var(--gold);font-size:20px}
+@media(max-width:600px){.panel{padding:16px}.tabs button{flex:1 1 42%}.timeline-item{align-items:flex-start}.timeline-item .year{min-width:58px}}
+</style>
+</head>
+<body>
+<header>
+<h1>丝绸之路：历史探索与外交决策</h1>
+<p>成为张骞的外交顾问，参与贸易，守护西域，向汉武帝汇报！</p>
+</header>
+<div class="wrap">
+<div class="topbar"><div class="progress"><div id="progressFill"></div></div><div class="score">小组积分：<span id="score">0</span></div></div>
+<nav class="tabs">
+<button class="active" data-tab="mission1">第一关：张骞出使</button>
+<button data-tab="mission2">第二关：贸易博览会</button>
+<button data-tab="mission3">第三关：西域治理</button>
+<button data-tab="mission4">终极挑战</button>
+<button data-tab="mission5">丝路导航</button>
+</nav>
+
+<section class="panel active" id="mission1">
+<h2>第一关：你是张骞，你会怎么做？</h2>
+<div class="callout">公元前138年，汉武帝派你出使西域，寻找大月氏。你肩负着重要使命，但前方道路充满未知。</div>
+<div class="question"><h3>1. 你认为这次出使最重要的目标是什么？</h3>
+<label class="option"><input type="radio" name="goal" value="A">A. 联络大月氏，共同对抗匈奴</label>
+<label class="option"><input type="radio" name="goal" value="B">B. 寻找新的贸易商品</label>
+<label class="option"><input type="radio" name="goal" value="C">C. 直接占领西域各国</label>
+<button class="btn primary" onclick="checkGoal()">提交选择</button><div class="feedback" id="goalFeedback"></div></div>
+<h3>2. 你在旅途中收集到以下情报。它们能告诉你什么？</h3>
+<div class="grid">
+<div class="card"><strong>大宛</strong><p>盛产良马，物产丰富，与周边地区有往来。</p></div>
+<div class="card"><strong>乌孙</strong><p>位于西域重要区域，具有一定军事力量。</p></div>
+<div class="card"><strong>大月氏</strong><p>曾受匈奴压迫，后来迁徙到更西面的地区。</p></div>
+<div class="card"><strong>安息</strong><p>地处东西交通要道，商业活动活跃。</p></div>
+</div>
+<label for="intel"><strong>作为使者，你会向汉武帝汇报哪些重要信息？</strong></label>
+<textarea id="intel" placeholder="写下至少两条你认为重要的情报，以及它们可能带来的影响……"></textarea>
+<h3>3. 第二次出使的目的有什么变化？</h3>
+<label class="option"><input type="radio" name="second" value="A">仍然只为寻找大月氏，任务没有变化</label>
+<label class="option"><input type="radio" name="second" value="B">进一步发展与西域各国的联系，促进交流</label>
+<label class="option"><input type="radio" name="second" value="C">只为寻找新的疆土</label>
+<button class="btn primary" onclick="checkSecond()">提交选择</button><div class="feedback" id="secondFeedback"></div>
+<div class="callout"><strong>历史思考：</strong>为什么张骞第一次出使虽然没有完成联合大月氏的原定目标，却仍被称为“凿空”？</div>
+<textarea id="dig" placeholder="用自己的话解释“凿空”的含义及张骞出使的历史意义……"></textarea>
+</section>
+
+<section class="panel" id="mission2">
+<h2>第二关：丝绸之路贸易博览会</h2>
+<p>你来到一场跨区域贸易博览会。请选择你代表的地区，并与至少两个不同地区进行“交易”。</p>
+<div class="question"><label><strong>选择你的代表地区</strong></label>
+<select id="region"><option value="">请选择</option><option>汉朝（中国）</option><option>中亚</option><option>西亚</option><option>欧洲及其他地区</option></select></div>
+<div class="grid">
+<div class="card"><strong>汉朝（中国）</strong><p>丝绸、漆器、陶器、铁器</p></div>
+<div class="card"><strong>西域 / 中亚</strong><p>葡萄、核桃、石榴、苜蓿、良种马</p></div>
+<div class="card"><strong>西亚</strong><p>玻璃器、香料及特色工艺品</p></div>
+<div class="card"><strong>欧洲及其他地区</strong><p>玻璃制品、香料，以及多样的文化与技艺</p></div>
+</div>
+<h3>选择你希望开展贸易或交流的地区（至少两个）</h3>
+<label class="option"><input type="checkbox" name="trade" value="汉朝（中国）">汉朝（中国）</label>
+<label class="option"><input type="checkbox" name="trade" value="中亚">中亚</label>
+<label class="option"><input type="checkbox" name="trade" value="西亚">西亚</label>
+<label class="option"><input type="checkbox" name="trade" value="欧洲及其他地区">欧洲及其他地区</label>
+<label for="deal"><strong>写下你想交换的商品或文化内容，并说明原因：</strong></label>
+<textarea id="deal" placeholder="例如：我希望用中国的丝绸交换……因为……"></textarea>
+<button class="btn primary" onclick="checkTrade()">完成交易</button><div class="feedback" id="tradeFeedback"></div>
+<h3>交流类型分类</h3><p class="small">把下面的交流活动分别归入政治、经济或文化交流。</p>
+<div class="grid">
+<div class="card"><strong>① 互派使者、建立友好关系</strong><select id="sort1"><option value="">选择类别</option><option>政治</option><option>经济</option><option>文化</option></select></div>
+<div class="card"><strong>② 商品买卖、物产交换</strong><select id="sort2"><option value="">选择类别</option><option>政治</option><option>经济</option><option>文化</option></select></div>
+<div class="card"><strong>③ 歌舞、乐器、宗教与艺术传播</strong><select id="sort3"><option value="">选择类别</option><option>政治</option><option>经济</option><option>文化</option></select></div>
+</div>
+<button class="btn primary" onclick="checkSort()">检查分类</button><div class="feedback" id="sortFeedback"></div>
+<div class="callout"><strong>思考：</strong>丝绸之路是否只运输丝绸？它还传播了什么？</div>
+<textarea id="silkThought" placeholder="写下你的观点……"></textarea>
+</section>
+
+<section class="panel" id="mission3">
+<h2>第三关：西域安全与管理委员会</h2>
+<div class="callout">张骞通西域后，汉朝与西域往来日益密切。但西域地区国家众多，匈奴势力仍有影响，商旅安全和交通秩序需要保障。</div>
+<h3>1. 排列历史事件（点击上下箭头调整顺序）</h3>
+<p class="small">请按时间先后排列。正确顺序：前138年、前119年、前60年、东汉明帝时期、班超派甘英出使大秦。</p>
+<div id="timeline"></div>
+<button class="btn primary" onclick="checkTimeline()">检查时间顺序</button><div class="feedback" id="timelineFeedback"></div>
+<h3>2. 你会向汉朝政府提出什么治理方案？</h3>
+<label class="option"><input type="radio" name="policy" value="A">A. 完全放弃西域，不再与西域往来</label>
+<label class="option"><input type="radio" name="policy" value="B">B. 设置管理机构，加强对西域的经营与管理</label>
+<label class="option"><input type="radio" name="policy" value="C">C. 只允许商人往来，不处理安全问题</label>
+<button class="btn primary" onclick="checkPolicy()">提交方案</button><div class="feedback" id="policyFeedback"></div>
+<div class="callout"><strong>历史揭晓：</strong>公元前60年，西汉政府设置西域都护，作为管理西域的机构，标志着西域正式归属中央政权管辖。西域都护府设在乌垒城。</div>
+<textarea id="govern" placeholder="西域都护的设置对统一多民族国家的发展有什么意义？"></textarea>
+</section>
+
+<section class="panel" id="mission4">
+<h2>终极挑战：向汉武帝作一分钟汇报</h2>
+<p>假设你是汉朝使者，请向皇帝汇报丝绸之路的价值。你的汇报需要包含政治、经济、文化三个方面。</p>
+<div class="grid">
+<div class="card"><strong>政治</strong><p>加强联系、增进了解、促进地区稳定。</p></div>
+<div class="card"><strong>经济</strong><p>促进商品交换、物产交流和商业发展。</p></div>
+<div class="card"><strong>文化</strong><p>推动技术、艺术、宗教与生活方式交流。</p></div>
+</div>
+<label for="speech"><strong>写下你的汇报（建议80—150字）：</strong></label>
+<textarea id="speech" style="min-height:150px" placeholder="陛下，臣认为开辟并发展丝绸之路具有重要意义……"></textarea>
+<button class="btn gold" onclick="finishSpeech()">提交汇报</button><div class="feedback" id="speechFeedback"></div>
+</section>
+
+<section class="panel" id="mission5">
+<h2>丝路导航：跟随商队走向远方</h2>
+<p>观察路线，思考沿线地区之间如何发生联系。</p>
+<div class="callout"><strong>陆上丝绸之路（示意）：</strong></div>
+<div class="mapline"><span class="place">长安</span><span class="arrow">→</span><span class="place">河西走廊</span><span class="arrow">→</span><span class="place">西域</span><span class="arrow">→</span><span class="place">中亚</span><span class="arrow">→</span><span class="place">西亚</span><span class="arrow">→</span><span class="place">欧洲</span></div>
+<div class="callout"><strong>海上丝绸之路：</strong>从中国沿海港口出发，经东南亚、印度洋沿岸等地区，与更远地区建立联系。</div>
+<h3>思考与选择</h3>
+<div class="question"><strong>1. 陆上丝绸之路连接了哪些区域？</strong>
+<label class="option"><input type="radio" name="route" value="A">只连接长安和河西走廊</label>
+<label class="option"><input type="radio" name="route" value="B">连接中国、中亚、西亚并延伸至欧洲</label>
+<label class="option"><input type="radio" name="route" value="C">只连接中国和日本</label></div>
+<div class="question"><strong>2. 丝绸之路最重要的历史作用是什么？</strong>
+<label class="option"><input type="radio" name="impact" value="A">只方便军队行军</label>
+<label class="option"><input type="radio" name="impact" value="B">促进不同地区之间的交流与联系</label>
+<label class="option"><input type="radio" name="impact" value="C">让所有地区变成相同的文化</label></div>
+<button class="btn primary" onclick="checkRoute()">提交导航答案</button><div class="feedback" id="routeFeedback"></div>
+</section>
+<div class="actions"><button class="btn" onclick="copyReport()">复制小组学习记录</button><button class="btn" onclick="window.print()">打印 / 保存为PDF</button><button class="btn" onclick="resetAll()">重新开始</button></div>
+</div>
+<footer>历史课堂互动任务｜请与组员讨论，依据史实作答，并用证据支持你的观点。</footer>
+<script>
+let score=0,completed=new Set();
+function addScore(n){score+=n;document.getElementById('score').textContent=score}
+function done(id){completed.add(id);document.getElementById('progressFill').style.width=(completed.size/5*100)+'%'}
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tabs button,.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById(b.dataset.tab).classList.add('active')}));
+function chosen(name){return document.querySelector('input[name="'+name+'"]:checked')?.value}
+function feedback(id,msg,ok){let e=document.getElementById(id);e.textContent=msg;e.className='feedback '+(ok?'good':'bad')}
+function checkGoal(){let v=chosen('goal');if(!v)return feedback('goalFeedback','请先选择一个答案。',false);let ok=v==='A';feedback('goalFeedback',ok?'回答正确！第一次出使的核心任务是联络大月氏，共同抗击匈奴。':'再想一想：汉武帝派张骞出使，最初希望联络谁共同对抗匈奴？',ok);if(ok){addScore(10);done('m1')}}
+function checkSecond(){let v=chosen('second');if(!v)return feedback('secondFeedback','请先选择一个答案。',false);let ok=v==='B';feedback('secondFeedback',ok?'正确！第二次出使进一步发展了汉朝与西域各国的联系。':'提示：第二次出使时，汉朝与西域的交往范围和内容更加广泛。',ok);if(ok)addScore(10)}
+function checkTrade(){let r=document.getElementById('region').value,ts=[...document.querySelectorAll('input[name="trade"]:checked')];if(!r||ts.length<2||!document.getElementById('deal').value.trim())return feedback('tradeFeedback','请选定代表地区、至少两个交流对象，并写下交易内容。',false);feedback('tradeFeedback','交易完成！请在全班交流时说明商品流动如何促进地区联系。',true);addScore(10);done('m2')}
+function checkSort(){let ok=document.getElementById('sort1').value==='政治'&&document.getElementById('sort2').value==='经济'&&document.getElementById('sort3').value==='文化';feedback('sortFeedback',ok?'分类全部正确！':'再检查一次：使者往来、商品交换、艺术宗教传播分别属于哪一类？',ok);if(ok)addScore(10)}
+const events=[{year:'前138年',name:'张骞第一次出使西域',order:1},{year:'前119年',name:'张骞第二次出使西域',order:2},{year:'前60年',name:'西汉设置西域都护',order:3},{year:'东汉明帝时期',name:'班超出使西域',order:4},{year:'东汉时期',name:'班超派甘英出使大秦',order:5}];
+let shuffled=[events[2],events[4],events[0],events[3],events[1]];
+function renderTimeline(){document.getElementById('timeline').innerHTML=shuffled.map((e,i)=>`<div class="timeline-item"><span class="year">${i+1}.</span><span style="flex:1">${e.year}｜${e.name}</span><button class="btn" onclick="moveEvent(${i},-1)" ${i===0?'disabled':''}>↑</button><button class="btn" onclick="moveEvent(${i},1)" ${i===4?'disabled':''}>↓</button></div>`).join('')}
+function moveEvent(i,d){let j=i+d;if(j<0||j>=shuffled.length)return;[shuffled[i],shuffled[j]]=[shuffled[j],shuffled[i]];renderTimeline()}
+renderTimeline();
+function checkTimeline(){let ok=shuffled.every((e,i)=>e.order===i+1);feedback('timelineFeedback',ok?'顺序正确！你已经掌握了张骞、班超与西域治理的时间线。':'还没排对。注意公元前的年代数字越大，时间越早；班超活动属于东汉时期。',ok);if(ok){addScore(15);done('m3')}}
+function checkPolicy(){let v=chosen('policy');if(!v)return feedback('policyFeedback','请先选择方案。',false);let ok=v==='B';feedback('policyFeedback',ok?'正确！设置管理机构有助于维护秩序、保障交通并加强中央与西域的联系。':'想一想：如何在保持交往的同时保障商旅安全、维护地区秩序？',ok);if(ok)addScore(10)}
+function finishSpeech(){let t=document.getElementById('speech').value.trim();if(t.length<45)return feedback('speechFeedback','请再充实一些，至少写45个字，并尽量涵盖政治、经济、文化三个方面。',false);let count=['政治','经济','文化'].filter(x=>t.includes(x)).length;feedback('speechFeedback',count===3?'汇报完成！三个角度都已涉及。请准备向全班进行一分钟陈述。':'汇报已提交。建议再检查是否分别谈到政治、经济和文化价值。',count===3);addScore(count===3?20:10);done('m4')}
+function checkRoute(){let a=chosen('route'),b=chosen('impact');if(!a||!b)return feedback('routeFeedback','请完成两道选择题。',false);let n=(a==='B'?1:0)+(b==='B'?1:0);feedback('routeFeedback',n===2?'导航成功！丝绸之路连接多个文明区域，推动了跨区域交流。':'有一题需要再思考：丝绸之路连接的区域范围，以及它带来的交流影响。',n===2);if(n===2){addScore(15);done('m5')}}
+function copyReport(){let fields=['小组积分：'+score,'史料情报：'+document.getElementById('intel').value,'凿空理解：'+document.getElementById('dig').value,'贸易方案：'+document.getElementById('deal').value,'丝路思考：'+document.getElementById('silkThought').value,'西域治理意义：'+document.getElementById('govern').value,'一分钟汇报：'+document.getElementById('speech').value];let text=fields.join('\n\n');if(navigator.clipboard?.writeText){navigator.clipboard.writeText(text).then(()=>alert('学习记录已复制，可粘贴到作业平台。')).catch(()=>alert(text))}else alert(text)}
+function resetAll(){if(!confirm('确定清空本次作答并重新开始吗？'))return;location.reload()}
+</script>
+</body></html>
